@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.BitSet;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -28,6 +29,10 @@ public class IdGenerationController {
         synchronized (lockObjects.get(domain)) {
             // Actual ID Generation Logic
             if ("table1".equals(domain)) {
+                int systemTimeInt = Long.valueOf(System.currentTimeMillis() / 1000L).intValue();
+                BitSet id = new BitSet(52);
+                BitSet unixTimeBits = BitSet.valueOf(new byte[] { (byte) systemTimeInt, (byte) (systemTimeInt >>> 8), (byte) (systemTimeInt >>> 16), (byte) (systemTimeInt >>> 24) });
+
                 System.out.println("Sleeping for table 1");
                 Thread.sleep(2000);
                 System.out.println("Returning Id for table 1");
