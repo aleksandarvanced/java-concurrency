@@ -1,0 +1,11 @@
+config:
+  target: "http://localhost:8080"
+  phases:
+    - duration: 10
+      arrivalRate: 5
+  http:
+    timeout: 20
+scenarios:
+  - flow:
+      - get:
+          url: "/api/v1/idgeneration/id?domain=table1"
